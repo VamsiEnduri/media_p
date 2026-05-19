@@ -17,11 +17,34 @@ with login:
 
 with signup:
     st.header("SignUp")
+
     with st.form("SignUp_Form"):
+
         name = st.text_input("Name")
         email = st.text_input("Email")
-        password = st.text_input("Password",type="password")
-        btn=st.form_submit_button("SignUp")
+        password = st.text_input("Password", type="password")
+
+        btn = st.form_submit_button("SignUp")
+
+        if btn:
+
+            try:
+                query = """
+                INSERT INTO users(name, email, password)
+                VALUES(%s, %s, %s)
+                """
+
+                values = (name, email, password)
+
+                cursor.execute(query, values)
+                conn.commit()
+
+                st.success("Signup Successful 🎉")
+
+            except Exception as e:
+                st.error("Error during signup")
+                st.write(e)
+
 
 
 
