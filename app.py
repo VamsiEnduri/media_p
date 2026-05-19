@@ -29,6 +29,7 @@ with signup:
         if btn:
 
             try:
+                # ---------------- INSERT ----------------
                 query = """
                 INSERT INTO users(name, email, password)
                 VALUES(%s, %s, %s)
@@ -41,10 +42,14 @@ with signup:
 
                 st.success("Signup Successful 🎉")
 
+                # ---------------- FETCH DATA ----------------
+                st.subheader("All Users")
+
+                cursor.execute("SELECT * FROM users")
+                users = cursor.fetchall()
+
+                st.dataframe(users)
+
             except Exception as e:
-                st.error("Error during signup")
+                st.error("Something went wrong")
                 st.write(e)
-
-
-
-
