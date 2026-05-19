@@ -2,7 +2,7 @@ import mysql.connector
 import streamlit as st 
 
 conn=mysql.connector.connect(
-    host=st.secrets["host"],
+    host=st.secrets["Host_Name"],
     user=st.secrets["user"],
     database=st.secrets["database"],
     password=st.secrets["password"],
